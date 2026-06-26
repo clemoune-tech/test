@@ -1,10 +1,10 @@
 {
   "name": "devsecops-sample-app",
   "version": "1.0.0",
-  "description": "Application pour le TP CI-CD",
-  "main": "src/server.js",
+  "description": "Application pour le TP CI-CD avec CodeQL",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node src/app.js",
     "test": "jest --runInBand --forceExit --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
