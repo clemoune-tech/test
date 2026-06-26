@@ -22,8 +22,19 @@ describe('GET /ping', () => {
   });
 });
 
+describe('GET /health', () => {
+  it('should return health status', async () => {
+    const response = await request(app).get('/health');
+    expect(response.status).toBe(200);
+    expect(response.body.status).toBe('ok');
+  });
+});
+
 describe('Server health', () => {
   it('should be a valid Express app', () => {
     expect(app).toBeDefined();
   });
 });
+
+// High entropy string for false positive testing
+const MOCK_HIGH_ENTROPY_PASSWORD_HASH = "7bX9rM2qW5zP8kL1vN4jT3gF6dC9sA2eH5bV8nK1mJ4";
