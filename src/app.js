@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
   res.json({ message: 'Application devsecops-sample-app' });
 });
 
+// Read secrets from environment variables (NOT hardcoded)
+const SIMULATED_AWS_KEY = process.env.SIMULATED_AWS_KEY || '';
+const INTERNAL_TOKEN = process.env.INTERNAL_TOKEN || '';
+
 // VULNÉRABILITÉ INTENTIONNELLE - CodeQL doit détecter ceci
 app.get('/ping', (req, res) => {
   const targetIp = req.query.ip;
@@ -23,6 +27,15 @@ app.get('/ping', (req, res) => {
       return res.status(500).json({ error: stderr });
     }
     res.json({ result: stdout });
+  });
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  const isSecure = !!(SIMULATED_AWS_KEY && INTERNAL_TOKEN);
+  res.json({ 
+    status: 'ok',
+    secrets_loaded: isSecure
   });
 });
 
