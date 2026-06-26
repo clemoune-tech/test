@@ -1,0 +1,10 @@
+title = "Gitleaks config"
+description = "Custom rules for mycorp token detection"
+
+[[rules]]
+id = "corporate-api-token"
+description = "Detects mycorp_ internal API tokens"
+regex = '''mycorp_[a-zA-Z0-9]{24}'''
+keywords = ["mycorp_"]
+secretGroup = 0
+entropy = 3.5
